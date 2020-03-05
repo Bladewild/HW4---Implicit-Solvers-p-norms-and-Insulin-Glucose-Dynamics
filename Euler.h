@@ -75,6 +75,7 @@ public:
   * @param[in] input_setp
   * @pre input_step is > 0
   * @pre T + T (addition) defined
+  * @pre  * T (multiplication) defined
   * @pre T =  (assignment) defined
   * @post y updated with y +ODE(y)
   * @post returns new y of type  T

@@ -18,6 +18,7 @@ using std::cin;
 using std::endl;
 
 void operatorsTest();
+void norm();
 
 int main(int argc, char* argv[])
 {
@@ -25,6 +26,7 @@ int main(int argc, char* argv[])
   try
   {
     operatorsTest();
+    norm();
     /*
     double stepsize = 0.1;
     float days = 30;
@@ -70,8 +72,18 @@ int main(int argc, char* argv[])
   return 0;
 }
 
+void norm()
+{
+  cout << "NORM----------- " << endl;
+  vector<int> first = { 1,-3,0,4};
+  cout << (first^(1))<<endl;
+  cout << (first ^ (2)) << endl;
+  cout << "NORM----------- " << endl;
+
+}
 void operatorsTest()
 {
+  cout << "OPERATORS----------- " << endl;
   vector<int> first = { 1,1,1,1,1,1 };
   vector<int> second = { 2,2,2,2,2,2 };
   vector<int> plusequalsTest = { 3,3,3,3,3,3 };
@@ -97,5 +109,6 @@ void operatorsTest()
   cout << "multTest1: " << multTest1 << endl;
   cout << "multTest2: " << multTest2 << endl;
   cout << "multTest3: " << multTest3 << endl;
+  cout << "OPERATORS----------- " << endl;
 
 }

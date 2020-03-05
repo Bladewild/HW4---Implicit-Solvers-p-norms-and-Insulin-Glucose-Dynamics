@@ -93,6 +93,10 @@ private:
   static vector<T> operatorhandler(const vector<T>& lVec,
     const vector<T>& rVec, const char& symbol);
 
+
+
+
+
   //PUBLIC------------------------------
 public: 
 
@@ -181,10 +185,20 @@ public:
   /*!
   * @brief  complements vector
   * @pre arr must have no null elements
-  * @post copies contents of otherVector to *this vector
+  * @post modifies into a complemented vector
   */
 
   vector<T> operator-() const;
+
+  /*!
+  * @brief  calculate p-norm
+  * @pre arr must have no null elements
+  * @pre T += T (plus equals) must be defined
+  * @pre satisfy customPow,nthRoot preconditions
+  * @post returns a (double) scalar of p-norm calculated
+  */
+
+  double operator^(const int input_pow) const;
   
   /*!
   * @brief  replaces vector contents with input stream

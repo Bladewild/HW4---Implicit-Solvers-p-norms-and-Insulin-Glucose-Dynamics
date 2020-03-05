@@ -8,6 +8,7 @@
 */
 
 #include "vector.h"
+#include "global.cpp"
 
 template <typename T>
 vector<T>::vector(int size) // constructor
@@ -100,6 +101,10 @@ template<typename T>
 vector<T> vector<T>::operator-() const
 {
   //check if vector is empty;
+  if (current_size == 0)
+  {
+    throw std::range_error(" vector is empty");
+  }
   T* new_complementarr = new T[current_size];
 
   for (int i = 0; i < current_size; i++)
@@ -110,6 +115,26 @@ vector<T> vector<T>::operator-() const
   delete[] new_complementarr;
   return v;
 }
+
+template<typename T>
+double vector<T>::operator^(const int input_pow) const
+{
+
+  if (current_size == 0)
+  {
+    throw std::range_error(" vector is empty");
+  }
+  double result = 0;
+
+  for (auto x : *this)
+  {
+    result += abs(customPow(x, input_pow));
+  }
+  result = nthRoot(result, input_pow);  
+  return result;
+}
+
+
 
 template<typename T>
 istream& operator >> (istream& finput, vector<T>& Obj)
@@ -332,7 +357,7 @@ template<typename T>
 vector<T> vector<T>::operatorhandler(const vector<T>& lVec,
   const vector<T>& rVec, const char& symbol)
 {
-  //check if empty
+  //check if unequal
   if (lVec.current_size != rVec.current_size)
   {
     throw std::invalid_argument("array sizes are unequal");

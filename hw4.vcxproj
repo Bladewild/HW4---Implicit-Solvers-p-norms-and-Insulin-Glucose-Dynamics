@@ -146,6 +146,7 @@
     <ClInclude Include="vector.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="global.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SIRD.cpp" />
   </ItemGroup>

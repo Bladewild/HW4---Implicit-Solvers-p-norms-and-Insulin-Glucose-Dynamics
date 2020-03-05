@@ -324,7 +324,7 @@ vector<T> operator*(const T& lhsScalar, const vector<T>& rhs)
   T* new_arr = new T[size];
   for (int i = 0; i < size; i++)
   {
-    new_arr[i] = lhsScalar*rhs[0];
+    new_arr[i] = lhsScalar*rhs[i];
   }
 
   vector<T> v = vector<T>(new_arr, size);
@@ -344,7 +344,7 @@ vector<T> operator*(const vector<T>& lhs, const  T& rhsScalar)
   T* new_arr = new T[size];
   for (int i = 0; i < size; i++)
   {
-    new_arr[i] = rhsScalar * lhs[0];
+    new_arr[i] = rhsScalar * lhs[i];
   }
 
   vector<T> v = vector<T>(new_arr, size);

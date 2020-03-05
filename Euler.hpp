@@ -38,6 +38,7 @@ T Euler<T>::operator () (double input_step)
     throw std::invalid_argument("input_step cannot be < 0 or = 0");
   }
   y = y + input_step* ODE(y);
+  //cout << "y: " << y << std::endl;
 
   return y ;
 

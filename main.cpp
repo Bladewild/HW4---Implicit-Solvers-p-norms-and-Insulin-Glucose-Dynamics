@@ -25,13 +25,17 @@ int main(int argc, char* argv[])
   
   try
   {
-    operatorsTest();
-    norm();
-    /*
+    //operatorsTest();
+    //norm();
+    
     double stepsize = 0.1;
     float days = 30;
     vector<double> v_ratesInput= {0.01, 0.1, 0.05 };
     SIRD modelTesting;
+    /*
+    SIRD modelTesting = SIRD(100, 1,
+      0.1, v_ratesInput);
+    */
     if (argc == 3)
     {
       double initpop = std::atof(argv[1]);
@@ -48,7 +52,7 @@ int main(int argc, char* argv[])
     {
       modelTesting();
       cout << modelTesting;
-    }*/
+    }
 
 
   }
@@ -78,6 +82,7 @@ void norm()
   vector<int> first = { 1,-3,0,4};
   cout << (first^(1))<<endl;
   cout << (first ^ (2)) << endl;
+  cout << (first ^ (99)) << endl;
   cout << "NORM----------- " << endl;
 
 }

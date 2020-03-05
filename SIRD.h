@@ -40,7 +40,6 @@ private:
   vector<double> state;
   Euler<vector<double>> SIRDeuler;
 
-  void createODE();
 public:
 
 

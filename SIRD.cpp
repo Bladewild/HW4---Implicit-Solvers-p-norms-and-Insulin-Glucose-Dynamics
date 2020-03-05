@@ -12,17 +12,53 @@
 
 SIRD::SIRD() :
   h(0.1), vRates(vector<double>{0.01, 0.1, 0.05 }),
-  state(vector<double>{ 99, 1, 0.0, 0.0}), SIRDeuler()
+  state(vector<double>{ 99, 1, 0.0, 0.0}),SIRDeuler(
+    Euler<vector<double>>(
+  [*this](vector<double> stateGiven)
+  {
+    double susceptibility = -(vRates[0] * stateGiven[1] * stateGiven[0]);
+    //infected
+    double first = (vRates[0] * stateGiven[1] * stateGiven[0]);
+    double second = (vRates[1] * stateGiven[1]);
+    double third = (vRates[2] * stateGiven[1]);
+
+    double infected = (first - second - third);
+    //-----
+    double recovered = vRates[1] * stateGiven[1];
+    double dead = vRates[2] * stateGiven[1];
+    vector<double> toReturn = { susceptibility, infected, recovered, dead };
+    return toReturn;
+  }
+      , state, h)
+  )
 {
-  createODE();
+  cout << "Default\n";
 
 }
 
 SIRD::SIRD(double init_population, double init_infected, double step_size, const vector<double> & v_input) :
   h(step_size), vRates(v_input),
-  state(vector<double>{ (init_population - init_infected), init_infected, 0.0, 0.0}), SIRDeuler()
+  state(vector<double>{ (init_population - init_infected), init_infected, 0.0, 0.0}), SIRDeuler(
+    Euler<vector<double>>(
+  [*this](vector<double> stateGiven)
+  {
+    double susceptibility = -(vRates[0] * stateGiven[1] * stateGiven[0]);
+    //infected
+    double first = (vRates[0] * stateGiven[1] * stateGiven[0]);
+    double second = (vRates[1] * stateGiven[1]);
+    double third = (vRates[2] * stateGiven[1]);
+
+    double infected = (first - second - third);
+    //-----
+    double recovered = vRates[1] * stateGiven[1];
+    double dead = vRates[2] * stateGiven[1];
+    vector<double> toReturn = { susceptibility, infected, recovered, dead };
+    return toReturn;
+  }
+      , state, h)
+  )
 {
-  createODE();
+  cout << "Input\n";
 }
 
 SIRD::SIRD(const SIRD& otherSIRD) :
@@ -71,29 +107,3 @@ SIRD& SIRD::operator=(const SIRD& source)
 }
 
 
-
-void SIRD::createODE()
-{
-  //using vRates directly causes issues, much safer to use variables
-  double infectionRate = vRates[0];
-  double recoveryRate = vRates[1];
-  double deathRate = vRates[2];
-  auto ODESIRD =
-	  [=](vector<double> stateGiven) 
-      {
-	  double susceptibility = -(infectionRate * stateGiven[1] * stateGiven[0]);
-	  //infected
-	  double first = (infectionRate * stateGiven[1] * stateGiven[0]);
-	  double second = (recoveryRate * stateGiven[1]);
-	  double third = (deathRate * stateGiven[1]);
-
-	  double infected = (first - second - third);
-	  //-----
-	  double recovered = recoveryRate * stateGiven[1];
-	  double dead = deathRate * stateGiven[1];
-	  vector<double> toReturn = { susceptibility, infected, recovered, dead };
-	  return toReturn;
-	};
-
-  SIRDeuler = Euler<vector<double>>(ODESIRD, state, h);
-}

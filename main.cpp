@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Author: Marky Santos-Tankia
 * File: main.cpp Date: 2/28/20
 * Class: CS 5201
@@ -12,6 +12,7 @@
 #include "vector.h"
 #include "Euler.h"
 #include "SIRD.h"
+#include <algorithm>    // std::max
 
 using std::cout;
 using std::cin;
@@ -19,23 +20,29 @@ using std::endl;
 
 void operatorsTest();
 void norm();
+void ODETEST();
 
-int main(int argc, char* argv[])
+//ask if we can private variables for Gb,Ib
+// or does it need to be changed
+int main()//(int argc, char* argv[])
 {
   
   try
   {
     //operatorsTest();
-    //norm();
-    
+    norm();
+    ODETEST();
+    /*
     double stepsize = 0.1;
     float days = 30;
     vector<double> v_ratesInput= {0.01, 0.1, 0.05 };
     SIRD modelTesting;
-    /*
-    SIRD modelTesting = SIRD(100, 1,
-      0.1, v_ratesInput);
     */
+    //SIRD modelTesting = SIRD(100, 1,
+    //  0.1, v_ratesInput);
+    
+    /*
+    
     if (argc == 3)
     {
       double initpop = std::atof(argv[1]);
@@ -52,7 +59,7 @@ int main(int argc, char* argv[])
     {
       modelTesting();
       cout << modelTesting;
-    }
+    }*/
 
 
   }
@@ -76,8 +83,56 @@ int main(int argc, char* argv[])
   return 0;
 }
 
+void ODETEST()
+{
+  /*
+  vector<double> p = { 0.05,0.5,0.0001,0.00001,150,0.05 };
+  //GXI
+  vector<double> state = { 400,0,200 };
+  vector<double> vBase = { 300,40 };
+  vector<double> vRates = { 1,1,1 };
+
+  auto ode =
+    [=](vector<double> stateGiven)
+  {
+    //dGdt=−(p1+X)G+p1Gb+uG GLUCOSE
+    double glucose = -(p[0] + stateGiven[1]) * p[0] + p[0] * vBase[0] + vRates[0];
+    //dXdt = −p2X + p3(I−Ib) helper
+    double helper = -(p[1] * stateGiven[1]) + p[2] * (stateGiven[2] - vBase[1]);
+    //dIdt = p4max(0, G−p5)−p6(I−Ib) + uI Insulin
+
+    double insulin = p[3] * (std::max(0.0, (stateGiven[0] - p[4])))
+      - p[5] * (stateGiven[2] - vBase[1]) + vRates[1];
+    //-----
+    vector<double> toReturn = { glucose, helper, insulin };
+    return toReturn;
+  };
+  // e is error term
+  //(in our case, the difference between the desired and actual blood glucose levels)
+
+  double Kp = 5 + (rand() % 15);
+  double Kd = Kp / (10 * (1 + rand() % 1));
+  double Ki = Kp / (10 * (1 + rand() % 1));
+  vector<double> vK = { Kp,Kd,Kp};
+  auto ode =
+    [=](double error)
+  {
+    double first = Kp * error;
+    double second = Ki * error;
+    double toReturn = first + second + third;
+    return toReturn;
+  };
+*/
+  /*
+  dGdt=−(p1+X)G+p1Gb+uG
+  dXdt=−p2X+p3(I−Ib)
+  dIdt=p4max(0,G−p5)−p6(I−Ib)+uI
+  */
+}
+
 void norm()
 {
+
   cout << "NORM----------- " << endl;
   vector<int> first = { 1,-3,0,4};
   cout << (first^(1))<<endl;

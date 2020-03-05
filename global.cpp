@@ -1,4 +1,7 @@
+
+
 #include <iostream>
+
 /*!
 * @brief  calculate p-norm
 * @pre arr must have no null elements
@@ -6,7 +9,8 @@
 * @post returns a (double) scalar of p-norm calculated
 */
 
-static double customPow(const double input_element, const int input_pow)
+
+double customPow(const double input_element, const int input_pow)
 {
   if (input_pow < 0)
   {
@@ -35,8 +39,8 @@ static double customPow(const double input_element, const int input_pow)
 * @pre
 * @post returns double scalar of given arguements
 */
-//  method returns Nth power of A 
-static double nthRoot(double value, int N)
+
+double nthRoot(double value, int N)
 {
   // intially guessing a random number between 
   // 0 and 9 
@@ -47,7 +51,7 @@ static double nthRoot(double value, int N)
 
   // initializing difference between two 
   // roots by INT_MAX 
-  double delX = INT_MAX;
+  double delX = 2147483647;
 
   //  xK denotes current value of x 
   double xK;

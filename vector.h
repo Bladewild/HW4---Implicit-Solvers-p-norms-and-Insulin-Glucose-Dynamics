@@ -366,6 +366,7 @@ public:
 
 
 
+#include "global.h"
 #include "vector.hpp"
 
 

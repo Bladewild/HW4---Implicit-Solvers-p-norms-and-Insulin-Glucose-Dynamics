@@ -14,7 +14,7 @@ SIRD::SIRD() :
   h(0.1), vRates(vector<double>{0.01, 0.1, 0.05 }),
   state(vector<double>{ 99, 1, 0.0, 0.0}),SIRDeuler(
     Euler<vector<double>>(
-  [*this](vector<double> stateGiven)
+  [this](vector<double> stateGiven)
   {
     double susceptibility = -(vRates[0] * stateGiven[1] * stateGiven[0]);
     //infected
@@ -40,7 +40,7 @@ SIRD::SIRD(double init_population, double init_infected, double step_size, const
   h(step_size), vRates(v_input),
   state(vector<double>{ (init_population - init_infected), init_infected, 0.0, 0.0}), SIRDeuler(
     Euler<vector<double>>(
-  [*this](vector<double> stateGiven)
+  [this](vector<double> stateGiven)
   {
     double susceptibility = -(vRates[0] * stateGiven[1] * stateGiven[0]);
     //infected
@@ -63,7 +63,7 @@ SIRD::SIRD(double init_population, double init_infected, double step_size, const
 
 SIRD::SIRD(const SIRD& otherSIRD) :
   h(otherSIRD.h), vRates(otherSIRD.vRates),
-  state(otherSIRD.state), SIRDeuler(otherSIRD.SIRDeuler){};
+  state(otherSIRD.state), SIRDeuler(otherSIRD.SIRDeuler){}
 
 
 

@@ -8,7 +8,7 @@
 */
 
 #include "vector.h"
-#include "global.cpp"
+
 
 template <typename T>
 vector<T>::vector(int size) // constructor

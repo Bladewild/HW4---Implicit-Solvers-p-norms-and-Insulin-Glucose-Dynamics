@@ -211,6 +211,10 @@ const T vector<T>::operator [] (const int index_var) const
 template<typename T>
 T& vector<T>::operator [] (const int index_var)
 {
+  if (current_size == 0)
+  {
+    throw std::range_error(" vector is empty");
+  }
 
   if (index_var < 0 || index_var >= current_size)
   {

@@ -24,10 +24,16 @@
     <ClInclude Include="Euler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SIRD.h">
+    <ClInclude Include="vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vector.h">
+    <ClInclude Include="IG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,10 +41,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SIRD.cpp">
+    <ClCompile Include="global.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="global.cpp">
+    <ClCompile Include="IG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,7 +11,7 @@
 #include <string>
 #include "vector.h"
 #include "Euler.h"
-#include "SIRD.h"
+#include "IG.h"
 #include <algorithm>    // std::max
 
 using std::cout;
@@ -24,33 +24,31 @@ void ODETEST();
 
 //ask if we can private variables for Gb,Ib
 // or does it need to be changed
-int main()//(int argc, char* argv[])
+int main()(int argc, char* argv[])
 {
   
   try
   {
+
     //operatorsTest();
-    norm();
-    ODETEST();
-    /*
+    //norm();
+    //ODETEST();
     double stepsize = 0.1;
     float days = 30;
     vector<double> v_ratesInput= {0.01, 0.1, 0.05 };
-    SIRD modelTesting;
-    */
-    //SIRD modelTesting = SIRD(100, 1,
-    //  0.1, v_ratesInput);
+    IG modelTesting;
     
-    /*
+    //IG modelTesting = IG(100, 1,
+    //  0.1, v_ratesInput);    
+    
     
     if (argc == 3)
     {
       double initpop = std::atof(argv[1]);
       double initinfected= std::atof(argv[2]);
-      modelTesting = SIRD(initpop, initinfected,
+      modelTesting = IG(initpop, initinfected,
         stepsize, v_ratesInput);
     }
-
 
     cout.precision(8); // as requested
     int stepstoTake = days/stepsize;
@@ -59,7 +57,7 @@ int main()//(int argc, char* argv[])
     {
       modelTesting();
       cout << modelTesting;
-    }*/
+    }
 
 
   }

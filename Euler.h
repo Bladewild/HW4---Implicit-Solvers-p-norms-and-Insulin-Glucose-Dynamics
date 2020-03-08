@@ -51,7 +51,7 @@ public:
   * @param[in] input_h h step_size
   * @post assigns variables
   */
-  Euler(const std::function<T(T)>& callback_f, const T initial_y0, const double input_h) :
+  Euler(const function<T(T)>& callback_f, const T initial_y0, const double input_h) :
     ODE(callback_f), y(initial_y0), h(input_h) {};
 
   /*!

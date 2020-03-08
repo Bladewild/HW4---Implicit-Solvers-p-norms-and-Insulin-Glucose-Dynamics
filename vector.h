@@ -34,7 +34,7 @@ using std::istream;
 
 /*
 * Class: vector
-*  Limited emulation of vector class for use of SIRD or any other.
+*  Limited emulation of vector class for use of IG or any other.
 *  Can use for range loops,resize (can cause null elements), etc.
 *  @note Do not attempt to do operations on a empty vector. 
 *  This can be made either through input_size=0 or

@@ -141,14 +141,17 @@
   <ItemGroup>
     <ClInclude Include="Euler.h" />
     <ClInclude Include="Euler.hpp" />
-    <ClInclude Include="SIRD.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="IG.h" />
+    <ClInclude Include="PID.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="vector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="global.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SIRD.cpp" />
+    <ClCompile Include="IG.cpp" />
+    <ClCompile Include="PID.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

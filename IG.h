@@ -4,21 +4,23 @@
 * Class: CS 5201
 * Instructor : Clayton Price
 *
-* SIRD file
+* IG file
 */
 
 /*! \file
  *
- * A SIRD emulation library.
+ * A IG emulation library.
  */
-#ifndef SIRD_H
-#define SIRD_H
+#ifndef IG_H
+#define IG_H
 
 
 #include <iostream>
 #include <functional>
 #include "vector.h"
 #include "Euler.h"
+#include "PID.h"
+#include <algorithm>    // std::max
 
 using std::cout;
 using std::function;
@@ -26,19 +28,23 @@ using std::ostream;
 
 
 /*
-* Class: SIRD
-*  Emulates a SIR(D) Model uses Euler object to
+* Class: IG
+*  Emulates a Insulin/Glucose Model uses Euler object to
 *  simulate the states. Encapsulates Euler as each step is taken
 *  Can output results with <<. Updates with () operator
 */
-class SIRD
+class IG
 {
 private:
 
+  double desiredGlucose;
   double h;
+  vector<double> p;
   vector<double> vRates;
+  vector<double> vBase;
   vector<double> state;
-  Euler<vector<double>> SIRDeuler;
+  Euler<vector<double>> IGeuler;
+  PID controller;
 
 public:
 
@@ -48,35 +54,34 @@ public:
   * @brief β=0.01, ν=0.1, and δ=0.05
   * @brief h=0.1 
   * @brief vector {S=99,I=1,R=0.0,D=0.0}
-  * @post creates SIRD object with default values
+  * @post creates IG object with default values
   */
-  SIRD();
+  IG();
 
 
   /*!
-  * @brief creates SIRD object with given paramater
-  * @param[in] init_population > init_infected
-  * @param[in] init_infected < init_population
-  * @param[in] step_size non zero positive number
-  * @param[in] v_input rate to be used in ODE
+  * @brief creates IG object with given paramater
+  * @param[in] 
+
   * @pre init_population,init_infected, step_size
   * @pre should all be positive integers
   * @pre init_population > init_infected
   * @pre all should be non zeros
-  * @post creates SIRD object with specified values
+  * @post creates IG object with specified values
   * @note v_input values should be reasonable but left up to user
   */
-  SIRD(double init_population, double init_infected, double step_size, 
-    const vector<double>& v_input);
+  IG(double input_desire, double step_size, const vector<double>& v_inputP,
+    const vector<double>& v_inputRates, const vector<double>& v_inputBase,
+    const vector<double>& v_inputState);
 
   /*! 
   * @brief copy constructor
-  * @param[in] otherSIRD to be copied from
+  * @param[in] otherIG to be copied from
   * @pre ---------------------------------------------------------
-  * @post copies contents from otherSIRD to this
+  * @post copies contents from otherIG to this
   */
 
-  SIRD(const SIRD& otherSIRD);
+  IG(const IG& otherIG);
 
   /*!
   * @brief steps default h
@@ -95,20 +100,20 @@ public:
   /*!
   * @brief outputes state vector values of Obj
   * @param[in] os ostream object
-  * @param[in] Obj SIRD object to print values from
+  * @param[in] Obj IG object to print values from
   * @post prints values in form
  Susceptible: <S>, Infected: <I>, Recovered: <R>, Deceased: <D>
   */
 
-  friend ostream& operator << (ostream& os, const SIRD& Obj);
+  friend ostream& operator << (ostream& os, const IG& Obj);
 
   /*!
   * @brief copies source contents to this object
-  * @param[in] source SIRD reference
-  * @post copies contents of SIRD to this if not same
+  * @param[in] source IG reference
+  * @post copies contents of IG to this if not same
   */
 
-  SIRD& operator = (const SIRD& source);
+  IG& operator = (const IG& source);
     
 };
 

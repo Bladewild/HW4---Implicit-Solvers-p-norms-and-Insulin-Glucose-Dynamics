@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "global.h"
 /*!
 * @brief  calculate p-norm
 * @pre arr must have no null elements
@@ -68,4 +69,21 @@ double nthRoot(double value, int N)
   }
 
   return xK;
+}
+
+
+
+double trapezoidalIntegral(double a, double b, int n, double error)
+{
+  const double width = (b - a) / n;
+
+  double trapezoidal_integral = 0;
+  for (int step = 0; step < n; step++)
+  {
+    const double x1 = a + step * width;
+    const double x2 = a + (step + 1) * width;
+
+    trapezoidal_integral += 0.5 * (x2 - x1) * (error + error);
+  }
+  return trapezoidal_integral;
 }

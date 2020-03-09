@@ -36,8 +36,14 @@ vector<double> PID::operator()(double input_step)
 {
   double error = calculateError();
   double iError = trapezoidalIntegral(0, input_step, input_step * 50.0, error);
-  double dError = previousError - error;
-  double u = PIDfunction(K, error, iError, dError);
+  double dError = error-previousError;
+  //cout << "error :" << error << endl;
+  //cout << "dError :" << dError << endl;
+  //cout << "Previous Error:" << previousError << endl;
+  //cout << "-----------"<< endl;
+  previousError = dError;
+  double u = PIDfunction(K, error, iError, dError); 
+  //std::cout << "U: " << u << endl;
   vector<double> new_U(2);
   new_U[0] = (u > 0) ? u : 0;
   new_U[1] = (u < 0) ? -u : 0;

@@ -42,7 +42,6 @@ T Euler<T>::operator () (double input_step)
   double specifiedTolerance=0.001;
   double errorTolerance;
   //initial predictor
-  cout.precision(8); 
   T yi = y;
   T ODEyi = ODE(y);
   //initial predictor - use current state
@@ -67,7 +66,6 @@ T Euler<T>::operator () (double input_step)
   }
 
   //std::cout << "----------------" << std::endl;
-  cout << endl;
   return y ;
 
 }

@@ -12,9 +12,9 @@
 
 IG::IG() :
   desiredGlucose(100),
-  h(0.1),
+  h(0.15),
   p(vector<double>{0.05, 0.5, 0.0001, 0.00001, 150, 0.05}),
-  vRates(vector<double>{ 1, 1, 1 }),
+  vRates(vector<double>{10, 1}),
   vBase(vector<double>{ 300, 40 }),
   state(vector<double>{400, 0, 200}),
   IGeuler(
@@ -40,7 +40,9 @@ IG::IG() :
       , state, h)),
     controller(
       PID(
-        [*this](void) {return desiredGlucose - state[0]; }, //calculateError
+        [this](void)
+  {
+    return desiredGlucose - state[0]; }, //calculateError
         [*this](vector<double> k_input, double error, double iError, double dError)
   {
     double P = k_input[0] * error;
@@ -48,15 +50,21 @@ IG::IG() :
     double D = k_input[2] * dError;//derivative here
 
     return (P + I + D);
-  }, vRates, (state[1] - desiredGlucose), h)
+    }, {5.5,0.005,0.025}, (0), h)
   )
 {
   cout << "Default\n";
+  /*
+  cout << "stepsize: " <<h<<endl;
+  cout << "vRates: " << vRates << endl;
+  cout << "vBase: " << vBase << endl;
+  cout << "state: " << vBase << endl;
+  cout << "desiredGlucose: " << desiredGlucose << endl;*/
 }
 
 IG::IG(double input_desire, double step_size, const vector<double> & v_inputP,
   const vector<double>& v_inputRates,const vector<double> & v_inputBase,
-  const vector<double> & v_inputState):
+  const vector<double> & v_inputState,const vector<double> k_input):
   desiredGlucose(input_desire),h(step_size), p(v_inputP),
   vRates(v_inputRates), state(v_inputState),
   IGeuler(
@@ -82,15 +90,15 @@ IG::IG(double input_desire, double step_size, const vector<double> & v_inputP,
       , state, h)), //EULER
     controller(
     PID(
-    [*this]() {return desiredGlucose - state[0]; }, //calculateError
-    [*this](vector<double> k_input, double error,double iError,double dError)
+    [this]() {return desiredGlucose - state[0]; }, //calculateError
+    [this](vector<double> k_input, double error,double iError,double dError)
     {
       double P = k_input[0] * error;
       double I = k_input[1] * iError;
       double D = k_input[2] * dError;//derivative here
 
       return (P + I + D);
-    },v_inputRates,(v_inputState[1] -input_desire),step_size)
+    }, v_inputP,(v_inputState[1] -input_desire),step_size)
   )
 {
   cout << "Input\n";
@@ -112,8 +120,10 @@ void IG::operator()()
   */
   //calculate U;
   vRates=controller();
+  //cout << "newRates: " << vRates << endl;
   //test model
   state = IGeuler();
+  //cout << "state: " << state << endl;
 }
 
 
@@ -129,9 +139,10 @@ void IG::operator()(double input_step)
 
 ostream& operator<<(ostream& os, const IG& Obj)
 {
-  cout.precision(8); // as requested
-  os <<"Glucose: "<< Obj.state[0]<<", "
-     <<"Insulin: "<< Obj.state[1] <<"\n";
+  os.precision(8); // as requested
+  //os <<"Glucose: "<< Obj.state[0]<<", "
+  //   <<"Insulin: "<< Obj.state[1] <<"\n";
+  os << Obj.state[0] << ","<< Obj.state[1] << "\n";
   return os;
 }
 

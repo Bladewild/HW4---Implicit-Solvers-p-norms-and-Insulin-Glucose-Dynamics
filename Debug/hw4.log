@@ -1,6 +1,2 @@
-﻿  main.cpp
-  IG.cpp
-  PID.cpp
-Z:\cs5201\hw4\hw4\PID.cpp(38,65): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
+﻿  IG.cpp
   hw4.vcxproj -> Z:\cs5201\hw4\hw4\Debug\hw4.exe

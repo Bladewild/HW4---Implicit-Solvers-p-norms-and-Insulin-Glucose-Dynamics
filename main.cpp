@@ -25,7 +25,7 @@ void ODETEST();
 
 //ask if we can private variables for Gb,Ib
 // or does it need to be changed
-int main(int argc, char* argv[])
+int main()
 {
   
   try

@@ -72,7 +72,7 @@ public:
   */
   IG(double input_desire, double step_size, const vector<double>& v_inputP,
     const vector<double>& v_inputRates, const vector<double>& v_inputBase,
-    const vector<double>& v_inputState, const vector<double> k_input);
+    const vector<double>& v_inputState, const vector<double> v_Kinput);
 
   /*! 
   * @brief copy constructor

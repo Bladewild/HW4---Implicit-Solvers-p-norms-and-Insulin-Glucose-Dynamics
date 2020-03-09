@@ -43,7 +43,7 @@ IG::IG() :
         [this](void)
   {
     return desiredGlucose - state[0]; }, //calculateError
-        [*this](vector<double> k_input, double error, double iError, double dError)
+        [this](vector<double> k_input, double error, double iError, double dError)
   {
     double P = k_input[0] * error;
     double I = k_input[1] * iError;
@@ -64,9 +64,9 @@ IG::IG() :
 
 IG::IG(double input_desire, double step_size, const vector<double> & v_inputP,
   const vector<double>& v_inputRates,const vector<double> & v_inputBase,
-  const vector<double> & v_inputState,const vector<double> k_input):
+  const vector<double> & v_inputState,const vector<double> v_Kinput):
   desiredGlucose(input_desire),h(step_size), p(v_inputP),
-  vRates(v_inputRates), state(v_inputState),
+  vRates(v_inputRates), vBase(v_inputBase), state(v_inputState),
   IGeuler(
     Euler<vector<double>>(
   [this](vector<double> stateGiven)
@@ -98,7 +98,7 @@ IG::IG(double input_desire, double step_size, const vector<double> & v_inputP,
       double D = k_input[2] * dError;//derivative here
 
       return (P + I + D);
-    }, v_inputP,(v_inputState[1] -input_desire),step_size)
+    }, v_Kinput,(v_inputState[1] -input_desire),step_size)
   )
 {
   cout << "Input\n";

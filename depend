@@ -1,3 +1,5 @@
-global.o: global.cpp
-main.o: main.cpp vector.h global.h vector.hpp Euler.h Euler.hpp IG.h
-IG.o: IG.cpp IG.h vector.h global.h vector.hpp Euler.h Euler.hpp
+global.o: global.cpp global.h
+IG.o: IG.cpp IG.h vector.h global.h vector.hpp Euler.h Euler.hpp PID.h
+main.o: main.cpp vector.h global.h vector.hpp Euler.h Euler.hpp IG.h \
+ PID.h
+PID.o: PID.cpp PID.h vector.h global.h vector.hpp

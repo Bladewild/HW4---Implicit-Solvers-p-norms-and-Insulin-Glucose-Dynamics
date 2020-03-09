@@ -65,11 +65,6 @@ PID& PID::operator = (const PID& source)
   return *this;
 }
 
-const double PID::operator[](const int index_var) const
-{
-  double toReturn = K[index_var];
-  return toReturn;
-}
 
 double& PID::operator[](const int index_var)
 {

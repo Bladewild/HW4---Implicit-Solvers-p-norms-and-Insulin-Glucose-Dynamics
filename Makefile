@@ -38,19 +38,19 @@ OBJECTS = $(SOURCES:%.cpp=%.o)
 
 default: driver
 
-driver: hw3.out
+driver: hw4.out
 
 %.o: %.cpp
 	@echo "Compiling $<"
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
-hw3.out: $(OBJECTS)
+hw4.out: $(OBJECTS)
 	@echo "Building $@"
 	@$(CXX) $(CXXFLAGS) $(OBJECTS) -o $@
 
 clean:
 	-@rm -f core > /dev/null 2>&1
-	-@rm -f hw3.out > /dev/null 2>&1
+	-@rm -f hw4.out > /dev/null 2>&1
 	-@rm -f depend > /dev/null 2>&1
 	-@rm -f $(OBJECTS) > /dev/null 2>&1
 

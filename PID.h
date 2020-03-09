@@ -93,7 +93,6 @@ public:
   * @throw range_error vector is empty (vector class)
 
   */
-  const double operator [] (const int index_var) const;
 
 
   /*!

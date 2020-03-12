@@ -70,3 +70,10 @@ double& PID::operator[](const int index_var)
 {
   return K[index_var];
 }
+
+
+
+void PID::reset(double setPoint)
+{
+  changeDesired(setPoint);
+}

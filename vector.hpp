@@ -282,7 +282,7 @@ vector<T> operator-(const vector<T>& lhs, const vector<T>& rhs)
 }
 
 template<typename T>
-vector < T> & vector<T>::operator +=(const vector<T> & rhs)
+vector <T> & vector<T>::operator +=(const vector<T> & rhs)
 {
   char symbol = '+';
   *this = vector<T>::operatorhandler(*this, rhs, symbol);
@@ -411,4 +411,11 @@ template<typename T>
 T* vector<T>::end() const
 {
   return current_size > 0 ? &arr[current_size] : nullptr;
+}
+
+
+template<typename T>
+vector<T>::operator double() const
+{
+  return (*this) ^ (2);
 }

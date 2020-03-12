@@ -74,12 +74,6 @@ public:
     h(otherPID.h),changeDesired(otherPID.changeDesired) //TODO CHECK THIS--------------------------------
   {}
 
-  void reset(double setPoint)
-  {
-    changeDesired(setPoint);
-  }
-
-
   /*!
   * @brief  returns value of element at position
   * @param[in]  index_var index position to access
@@ -131,6 +125,13 @@ public:
 
   
 
+  /*!
+  * @brief 
+  * @param[in] 
+  * @post 
+  */
+
+  void reset(double setPoint);
 
 };
 

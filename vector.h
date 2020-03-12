@@ -74,7 +74,7 @@ private:
   * @throw invalid_argument if symbol not supported
   */
 
-  static T handleMath(const char & symbol, const T & left, const T& right);
+  static T handleMath(const char& symbol, const T& left, const T& right);
 
   /*!
   * @brief Creates a vector with two vector passed
@@ -98,7 +98,7 @@ private:
 
 
   //PUBLIC------------------------------
-public: 
+public:
 
   /*!
   * @brief Constructs vector of specificied size
@@ -108,7 +108,7 @@ public:
   * @post creates vector of specified size
   */
 
-  explicit vector(int size=0);
+  explicit vector(int size = 0);
 
   /*!
   * @brief  makes a new vector from given array
@@ -121,7 +121,7 @@ public:
   * @note array size cannot be found, must be passed
   */
 
-  vector(const T * input_array, const int input_size); // constructor
+  vector(const T* input_array, const int input_size); // constructor
 
   /*!
   * @brief creates vector from initializer list
@@ -134,7 +134,7 @@ public:
 
   /*!
   * @brief  copy constructor
-  * @param[in]  otherVector 
+  * @param[in]  otherVector
   * @pre  otherVector must have pass init() preconditions
   * @post copies contents of otherVector to *this vector
   */
@@ -162,11 +162,12 @@ public:
   */
 
   void resize(const int new_size);
-  
+
 
   /*!
   * @brief  add and store vector
   * @pre rhs must be same size as *this vector
+  * @pre must pass operatorhandler() preconditions
   * @post adds and copies contents of otherVector to *this vector
   * @note almost same contents as operator+(vector lhs,vector rhs)
   */
@@ -176,11 +177,35 @@ public:
   /*!
   * @brief  subtract and store vector
   * @pre rhs must be same size as *this vector
+  * @pre must pass operatorhandler() preconditions
   * @post subtract and copies contents of otherVector to *this vector
   * @note almost same contents as operator-(vector lhs,vector rhs)
   */
 
   vector<T>& operator -=(const vector<T>& rhs);
+
+  /*!
+  * @brief adds two vectors
+  * @param[in] lhs vector
+  * @param[in] rhs vector
+  * @pre must pass operatorhandler() preconditions
+  * @post returns result of vector addition
+  */
+
+  template<typename U>
+  friend vector<U> operator+(const vector<U>& lhs, const vector<U>& rhs);
+
+
+  /*!
+  * @brief
+  * @param[in] lhs vector
+  * @param[in] rhs vector
+  * @pre must pass operatorhandler() preconditions
+  * @post returns result of vector subtraction
+  */
+
+  template<typename U>
+  friend vector<U> operator-(const vector<U>& lhs, const vector<U>& rhs);
 
   /*!
   * @brief  complements vector
@@ -199,7 +224,7 @@ public:
   */
 
   double operator^(const int input_pow) const;
-  
+
   /*!
   * @brief  replaces vector contents with input stream
   * @param[in]  finput  input stream
@@ -229,37 +254,14 @@ public:
   /*!
   * @brief
   * @param[in]
-  * @pre if arr has null elements, f callback must allow null
-  * @pre elements
-  * @pre resizing bigger can empty elements that can lead to throws
+  * @pre f_callback must be able to handle unassigned elements 
+  * @pre "function f must have the signature T f(T) (for template type T)"
   * @post function calls each element and stores them into new vector
   * @post return new vector
   */
   template<typename U>
-  vector<T> apply(const U & f);
+  vector<T> apply(const U& f);
 
-  /*!
-  * @brief adds two vectors
-  * @param[in] lhs vector
-  * @param[in] rhs vector
-  * @pre must pass operatorhandler() preconditions
-  * @post returns result of vector addition
-  */
-
-  template<typename U>
-  friend vector<U> operator+(const vector<U>& lhs, const vector<U>& rhs);
-
-
-  /*!
-  * @brief 
-  * @param[in] lhs vector
-  * @param[in] rhs vector
-  * @pre must pass operatorhandler() preconditions
-  * @post returns result of vector subtraction
-  */
-
-  template<typename U>
-  friend vector<U> operator-(const vector<U>& lhs, const vector<U>& rhs);
 
   /*!
   * @brief  returns value of element at position
@@ -276,7 +278,7 @@ public:
 
   /*!
   * @brief  returns reference of element at position
-  * @param[in]  index_var index position to access  
+  * @param[in]  index_var index position to access
   * @pre index_var must be bounded,non negative
   * @pre resizing bigger can make empty elements giving garbage
   * @post returns reference to element at given index_var
@@ -285,7 +287,7 @@ public:
   * @note empty elements can occur resulting int accessing garbage
   */
 
-  T & operator [] (const int index_var);
+  T& operator [] (const int index_var);
 
 
   /*!
@@ -297,13 +299,13 @@ public:
   * @pre must pass operator handler precondition (T * T defined in this case)
   * @post returns runs operatorhandlerfunction
   * @post returns sums up vector from said function
-  * @post returns result of type T scalar dot opreator
+  * @post returns result of type T scalar dot operator
   */
 
   template<typename U>
   friend U operator*(const vector<U>& lhs, const vector<U>& rhs);
 
-  
+
   /*!
   * @brief multiple vector by scalar multiple
   * @param[in] lhsScalar multiply by
@@ -311,13 +313,14 @@ public:
   * @pre rhs size > 0
   * @pre vector passed must have have no null elements
   * @pre T must define T * T (multiplication) operator
+  * @pre T must define T = T (assignment) operator
   * @post mutiplies each element of vector by lhsScalar
   * @post returns resulting vector
   * @throw invalid_argument vector size < 0
   */
 
   template<typename U>
-  friend vector<U> operator*(const U & lhsScalar, const vector<U>& rhs);
+  friend vector<U> operator*(const U& lhsScalar, const vector<U>& rhs);
 
   /*!
   * @brief multiple vector by scalar multiple
@@ -326,6 +329,7 @@ public:
   * @pre rhs size > 0
   * @pre vector passed must have have no null elements
   * @pre T must define T * T (multiplication) operator
+  * @pre T must define T = T (assignment) operator
   * @post mutiplies each element of vector by rhsScalar
   * @post returns resulting vector
   * @throw invalid_argument vector size < 0
@@ -363,10 +367,13 @@ public:
   */
   T* end() const;
 
-  operator double () 
-  { return (*this) ^ (2); }
+  /*!
+  * @brief returns length of vector (norm 2)
+  * @pre must pass ^operator preconditions
+  * @post returns norm 2 of the vector
+  */
+  operator double() const;
 };
-
 
 
 #include "global.h"

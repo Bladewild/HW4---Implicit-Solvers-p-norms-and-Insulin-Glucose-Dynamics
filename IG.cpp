@@ -50,7 +50,7 @@ IG::IG() :
     double D = k_input[2] * dError;//derivative here
 
     return (P + I + D);
-    }, {5.5,0.005,0.025}, (0), h,
+    }, {5,1,0.002}, (0), h,
     [this](double toChange){desiredGlucose = toChange;})
   )
 {

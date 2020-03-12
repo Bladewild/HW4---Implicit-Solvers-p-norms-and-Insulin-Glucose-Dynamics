@@ -92,6 +92,7 @@ public:
   Euler<T>& operator = (const Euler<T>& source);
 
 
+
 };
 
 #include "Euler.hpp"

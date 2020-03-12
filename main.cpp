@@ -22,6 +22,7 @@ using std::endl;
 void operatorsTest();
 void norm();
 void ODETEST();
+void conversion();
 
 //ask if we can private variables for Gb,Ib
 // or does it need to be changed
@@ -34,6 +35,9 @@ int main()
     //operatorsTest();
     //norm();
     //ODETEST();
+    //conversion();
+
+    
     std::ofstream fout;
     fout.open("data.csv");
     double stepsize = 0.15;
@@ -74,6 +78,14 @@ int main()
   return 0;
 }
 
+void conversion()
+{
+  vector<double> test= {2,2,2,2};
+  cout << (test ^ (2)) << endl;
+  int n = static_cast<double>(test);   // OK: sets n to 7
+  cout << n << endl;
+
+}
 void ODETEST()
 {
   /*

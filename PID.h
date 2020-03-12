@@ -35,20 +35,12 @@ private:
   //pid
   //in our case, the difference between the desired and actual blood glucose levels)
   function <double(void)> calculateError;
-  function <double(vector<double>, double, double, double)> PIDfunction;/* =
-    [*this](double error)
-  {
-    double error = calculateError();
-    double P = K[0] * error;
-    double I = K[1] *
-      (trapezoidalIntegral(time, timestep, integralsteps,error);
-    double D = K[2] * //derivative here
-
-    return toReturn;
-  };*/
+  function <double(vector<double>, double, double, double)> PIDfunction;
   vector<double> K;
   double previousError;
   double h;
+  vector<double> * state;
+  function <void(double)> changeDesired;
 
 
 public:
@@ -65,9 +57,9 @@ public:
   * @param[in] 
   * @post 
   */
-  PID(const std::function <double(void)> f_error, const std::function <double(vector<double>, double, double, double)> f_PID,
-    const vector<double>& input_K, double input_PE, double input_stepSize) :
-    calculateError(f_error), PIDfunction(f_PID), K(input_K), previousError(input_PE), h(input_stepSize)
+  PID(const std::function <double(void)> & f_error, const std::function <double(vector<double>, double, double, double)> & f_PID,
+    const vector<double>& input_K, double input_PE, double input_stepSize,const std::function <void(double)> & f_changeDesired) :
+    calculateError(f_error), PIDfunction(f_PID), K(input_K), previousError(input_PE), h(input_stepSize),changeDesired(f_changeDesired)
   {};
 
 
@@ -79,8 +71,13 @@ public:
   PID(const PID& otherPID):
     calculateError(otherPID.calculateError), PIDfunction(otherPID.PIDfunction),
     K(otherPID.K), previousError(otherPID.previousError),
-    h(otherPID.h)
+    h(otherPID.h),changeDesired(otherPID.changeDesired) //TODO CHECK THIS--------------------------------
   {}
+
+  void reset(double setPoint)
+  {
+    changeDesired(setPoint);
+  }
 
 
   /*!
@@ -131,6 +128,8 @@ public:
   * @post copies source's content to *this
   */
   PID & operator = (const PID& source);
+
+  
 
 
 };

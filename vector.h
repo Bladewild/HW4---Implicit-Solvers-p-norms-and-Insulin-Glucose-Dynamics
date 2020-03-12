@@ -362,6 +362,9 @@ public:
   * @post returns nullptr if size < 0
   */
   T* end() const;
+
+  operator double () 
+  { return (*this) ^ (2); }
 };
 
 

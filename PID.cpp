@@ -35,7 +35,8 @@ vector<double> PID::operator()()
 vector<double> PID::operator()(double input_step)
 {
   double error = calculateError();
-  double iError = trapezoidalIntegral(0, input_step, input_step * 50.0, error);
+  //double iError = trapezoidalIntegral(0, input_step, input_step * 50.0, error);
+  double iError = 0.5 * (input_step) * (previousError + error);
   double dError = error-previousError;
   //cout << "error :" << error << endl;
   //cout << "dError :" << dError << endl;

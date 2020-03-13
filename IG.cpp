@@ -47,10 +47,10 @@ IG::IG() :
   {
     double P = k_input[0] * error;
     double I = k_input[1] * iError;
-    double D = k_input[2] * dError;//derivative here
+    double D = k_input[2] * dError;
 
     return (P + I + D);
-    }, {5,1,0.002}, (0), h,
+    }, {5,0.001,0.002}, (0), h,
     [this](double toChange){desiredGlucose = toChange;})
   )
 {
@@ -103,29 +103,27 @@ IG::IG(double input_desire, double step_size, const vector<double> & v_inputP,
     [this](double toChange){desiredGlucose = toChange;})
   )
 {
-  cout << "Input\n";
+  cout << "Input\n";/*
+  cout << "stepsize: " << h << endl;
+  cout << "vBase: " << vBase << endl;
+  cout << "state: " << state << endl;
+  cout << "desiredGlucose: " << desiredGlucose << endl; */
 }
     // [*this](double s) {return desiredGlucose - state[0]; }, //calculateError
 
 IG::IG(const IG& otherIG) :
-  h(otherIG.h), vRates(otherIG.vRates),
+  desiredGlucose(otherIG.desiredGlucose),h(otherIG.h),p(otherIG.p),
+  vRates(otherIG.vRates), vBase(otherIG.vBase),
   state(otherIG.state), IGeuler(otherIG.IGeuler){}
 
 
 
 void IG::operator()()
 {
-  /*
-  function evaluation operator () that “steps” the model, calculating
-  the insulin/glucose concentrations for the next moment in time 
-  (taking into account the control parameters for that time step)
-  */
   //calculate U;
   vRates=controller();
-  //cout << "newRates: " << vRates << endl;
   //test model
   state = IGeuler();
-  //cout << "state: " << state << endl;
 }
 
 

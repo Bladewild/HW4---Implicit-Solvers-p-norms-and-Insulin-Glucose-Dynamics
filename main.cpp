@@ -43,6 +43,15 @@ int main()
     double stepsize = 0.15;
     float days = 200;
     IG modelTesting;
+    /*
+    IG modelTesting(
+      100.0,
+      0.15,
+      vector<double>{0.05, 0.5, 0.0001, 0.00001, 150, 0.05},
+      vector<double>{10, 1},
+      vector<double>{ 300, 40 },
+      vector<double>{400,0, 200},
+      vector<double>{ 5,0.001,0.002});*/
 
     fout.precision(8); // as requested
     int stepstoTake = days/stepsize;
@@ -57,8 +66,6 @@ int main()
         modelTesting.controller.reset(300);
       }
     }
-
-
   }
   catch (const std::out_of_range & oor) {
     std::cerr << "\nOut of Range error: " << oor.what() << '\n';

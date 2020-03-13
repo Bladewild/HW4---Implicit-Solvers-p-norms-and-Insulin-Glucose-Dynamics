@@ -25,10 +25,11 @@ using std::endl;
 
 
 /*
-* Class: Euler
+* Class: Implicit Euler
 *  Wraps a function given,initial state and constants
 *  Keeps track state as each step is taken which returns the
 *  y+1 value. y+1 becomes the y value and the cycle continues
+*  Uses iterative method to calculate next step.
 */
 template<typename T>
 class Euler
@@ -64,6 +65,7 @@ public:
   
   /*  
   * @brief calls ()(double_input) with var h as step size
+  * @pre ()(double) preconditions
   * @post steps by default h and updates function 
   * @post y is updated to y+1 with ODE
   */
@@ -77,6 +79,7 @@ public:
   * @pre T + T (addition) defined
   * @pre  * T (multiplication) defined
   * @pre T =  (assignment) defined
+  * @pre static_cast<double> must be defined for T
   * @post y updated with y +ODE(y)
   * @post returns new y of type  T
   * @throw invalid_argument if negative or zero

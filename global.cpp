@@ -3,13 +3,6 @@
 #include <iostream>
 
 #include "global.h"
-/*!
-* @brief  calculate p-norm
-* @pre arr must have no null elements
-* @pre
-* @post returns a (double) scalar of p-norm calculated
-*/
-
 
 double customPow(const double input_element, const int input_pow)
 {
@@ -34,15 +27,13 @@ double customPow(const double input_element, const int input_pow)
 }
 
 
-/*!
-* @brief  calculates nth root
-* @pre
-* @pre
-* @post returns double scalar of given arguements
-*/
-
 double nthRoot(double value, int N)
 {
+
+  if (N < 0)
+  {
+    throw std::invalid_argument("use customPow instead");
+  }
   // intially guessing a random number between 
   // 0 and 9 
   double xPre = rand() % 10;
@@ -72,7 +63,7 @@ double nthRoot(double value, int N)
 }
 
 
-
+/*
 double trapezoidalIntegral(double a, double b, int n, double error)
 {
   const double width = (b - a) / n;
@@ -86,4 +77,4 @@ double trapezoidalIntegral(double a, double b, int n, double error)
     trapezoidal_integral += 0.5 * (x2 - x1) * (error + error);
   }
   return trapezoidal_integral;
-}
+}*/

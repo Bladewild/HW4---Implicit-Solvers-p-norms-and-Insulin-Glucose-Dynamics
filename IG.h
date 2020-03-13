@@ -69,14 +69,18 @@ public:
 
   /*!
   * @brief creates IG object with given paramater
-  * @param[in] 
-
-  * @pre 
-  * @pre 
-  * @pre 
-  * @pre
-  * @post 
-  * @note 
+  * @param[in] input_desire desiredGlucose to go towards
+  * @param[in] step_size how much to simulate in timesteps
+  * @param[in] v_inputP p constants for the ODE
+  * @param[in] v_inputRates initial Rates added (this is overwritten anyway)
+  * @param[in] v_inputBase Base Glucose and Insulin Concentrations
+  * @param[in] v_inputState Initial state of the model (G,X,I) in this order
+  * @param[in] v_Kinput constants to change the magnitude of PID variables
+  * @pre step_size>0, for step function () to work
+  * @pre constants to be used in equations should be reasonable,
+  * @pre but keep in mind that some should be positive
+  * @pre (v_inputP,v_inputBase,v_inputState,v_inputKInput)
+  * @post creates an Insulin/Glucose simulation
   */
   IG(double input_desire, double step_size, const vector<double>& v_inputP,
     const vector<double>& v_inputRates, const vector<double>& v_inputBase,
@@ -85,7 +89,6 @@ public:
   /*! 
   * @brief copy constructor
   * @param[in] otherIG to be copied from
-  * @pre ---------------------------------------------------------
   * @post copies contents from otherIG to this
   */
 
@@ -112,7 +115,7 @@ public:
   * @param[in] os ostream object
   * @param[in] Obj IG object to print values from
   * @post prints values in form
- Glucose: <G>, Insulin: <I>
+    Glucose: <G>, Insulin: <I>
   */
 
   friend ostream& operator << (ostream& os, const IG& Obj);

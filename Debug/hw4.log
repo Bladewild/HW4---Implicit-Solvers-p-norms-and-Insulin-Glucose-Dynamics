@@ -1,6 +1,8 @@
 ﻿  IG.cpp
+  PID.cpp
+  global.cpp
   main.cpp
-Z:\cs5201\hw4\hw4\main.cpp(48,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-Z:\cs5201\hw4\hw4\main.cpp(87,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Z:\cs5201\hw4\hw4\main.cpp(57,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Z:\cs5201\hw4\hw4\main.cpp(96,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   Generating Code...
   hw4.vcxproj -> Z:\cs5201\hw4\hw4\Debug\hw4.exe
